@@ -3,7 +3,8 @@ import axios from 'axios'
 
 export default createStore({
   state: {
-    counter: 0
+    counter: 0,
+    colorCode: 'red'
   },
   // methods or functions that changes the states properties
   // commit methods
@@ -13,6 +14,9 @@ export default createStore({
     },
       decreaseCounter(state, randomNumber) {
      state.counter -= randomNumber
+    },
+    setColorCode(state, newValue){
+      state.colorCode = newValue
     }
   },
   // can have asynchronous code
@@ -33,10 +37,16 @@ export default createStore({
         // send random number as payload to mutation
        commit('decreaseCounter', response.data)
       })
-    }
+    },
+    setColorCode({ commit }, newValue){
+    commit('setColorCode', newValue)
   },
+  },
+  
   getters: {
-
+      counterSquared(state){
+        return state.counter * state.counter
+      }
   },
   modules: {
   }
